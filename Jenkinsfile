@@ -30,15 +30,15 @@ pipeline {
             }
         }
         stage('Maven Build') {
-            agent {
-                docker {
-                    image 'maven:3-jdk-8-alpine'
-                    args '-v $HOME/.m2:/root/.m2'
-                }
-            }
+//            withMaven (
+//                 maven: 'default'
+//             ){
+//                 sh "mvn clean install -DskipTests"
+//             }
+            agent any
             steps {
                 echo "2. 代码编译打包"
-                sh 'mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
+                sh 'docker pull maven:3-jdk-8-alpine -v $HOME/.m2:/root/.m2 && mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
             }
         }
         stage('Docker Build') {
