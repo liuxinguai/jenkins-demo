@@ -10,7 +10,7 @@ pipeline {
         KUBE_CONFIG_PROD = "" //credentials('prod-k8s-kube-config') //生产环境的kube凭证
 
         DOCKER_REGISTRY = "registry.cn-shanghai.aliyuncs.com" //Docker仓库地址
-        DOCKER_NAMESPACE = "your-namespace"  //命名空间
+        DOCKER_NAMESPACE = "jenkinstest"  //命名空间
         DOCKER_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/${GIT_REPO}" //Docker镜像地址
 
         INGRESS_HOST_DEV = "dev.your-site.com"    //开发环境的域名
