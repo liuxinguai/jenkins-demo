@@ -30,16 +30,16 @@ pipeline {
             }
         }
         stage('Maven Build') {
-//            withMaven (
-//                 maven: 'default'
-//             ){
-//                 sh "mvn clean install -DskipTests"
-//             }
-            agent any
-            steps {
-                echo "2. 代码编译打包"
-                sh 'docker pull maven:3-jdk-8-alpine -v $HOME/.m2:/root/.m2 && mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
+           withMaven (
+                maven: 'default'
+            ){
+                sh "mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true"
             }
+//             agent any
+//             steps {
+//                 echo "2. 代码编译打包"
+//                 sh 'docker pull maven:3-jdk-8-alpine -v $HOME/.m2:/root/.m2 && mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
+//             }
         }
         stage('Docker Build') {
             agent any
